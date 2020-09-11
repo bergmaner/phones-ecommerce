@@ -1,9 +1,9 @@
-exports.signupValidator = (req, res) => {
+exports.signupValidator = (req, res, next) => {
   req.check("name", "Name is required").notEmpty();
   req
     .check("email", "Email must be between 3 to 32 characters")
     .matches(/.+\@.+\..+/)
-    .withMessage("Email have")
+    .withMessage("Email has bad formatted")
     .isLength({
       min: 4,
       max: 32,
