@@ -42,4 +42,4 @@ app.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });
 
-console.log(all_routes(app));
+all_routes(app).map((item) => console.log(item.methods + "" + item.path));
