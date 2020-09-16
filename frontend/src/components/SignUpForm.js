@@ -1,14 +1,18 @@
 import React from "react";
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock,FaEnvelope } from "react-icons/fa";
 import { Form, InputContainer, Title, Button } from "../styled-components/form";
 
-const SignInForm = () => {
+const SignUpForm = () => {
   return (
-    <Form visible>
-      <Title>Sign in</Title>
+    <Form>
+      <Title>Sign up</Title>
       <InputContainer>
         <FaUser />
         <input type="text" placeholder="Username" />
+      </InputContainer>
+      <InputContainer>
+        <FaEnvelope/>
+        <input type="email" placeholder="Email" />
       </InputContainer>
       <InputContainer>
         <FaLock />
@@ -18,4 +22,4 @@ const SignInForm = () => {
     </Form>
   );
 };
-export default SignInForm;
+export default SignUpForm;

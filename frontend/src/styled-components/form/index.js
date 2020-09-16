@@ -1,10 +1,26 @@
 import styled from "styled-components";
 
+export const FormsContainer = styled.div`
+position: absolute;
+top: 50%;
+left: 75%;
+transform: translate(-50%, -50%);
+width 50%;
+display: grid;
+grid-template-columns: 1fr
+`;
+
 export const Form = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  overflow: hidden;
+  padding: 0 5rem;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  z-index: ${props => props.visible ? 2 : 1};
+  opacity: ${props => props.visible ? 1: 0};
 `;
 
 export const InputContainer = styled.div`
@@ -13,7 +29,7 @@ export const InputContainer = styled.div`
   height: 55px;
   background-color: #f0f0f0;
   margin: 10px 0;
-  border-radius: 35px;
+  border-radius: 55px;
   display: grid;
   grid-template-columns: 15% 85%;
   padding: 0.4rem;
