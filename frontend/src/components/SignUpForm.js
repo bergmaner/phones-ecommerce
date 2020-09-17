@@ -2,9 +2,9 @@ import React from "react";
 import { FaUser, FaLock,FaEnvelope } from "react-icons/fa";
 import { Form, InputContainer, Title, Button } from "../styled-components/sign";
 
-const SignUpForm = () => {
+const SignUpForm = ({signUp}) => {
   return (
-    <Form>
+    <Form visible={signUp}>
       <Title>Sign up</Title>
       <InputContainer>
         <FaUser />

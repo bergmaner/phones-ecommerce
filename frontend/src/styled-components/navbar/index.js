@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const NavWrapper = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 7;
   width: 100%;
   box-sizing: border-box;
   padding-top: 2.5vw;

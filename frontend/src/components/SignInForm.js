@@ -2,9 +2,14 @@ import React from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import { Form, InputContainer, Title, Button } from "../styled-components/sign";
 
-const SignInForm = () => {
+const handleClick = (e) =>{
+  e.preventDefault();
+  console.log("kk")
+}
+
+const SignInForm = ({signUp}) => {
   return (
-    <Form visible>
+    <Form onSubmit={handleClick} visible={!signUp}>
       <Title>Sign in</Title>
       <InputContainer>
         <FaUser />
@@ -14,7 +19,7 @@ const SignInForm = () => {
         <FaLock />
         <input type="password" placeholder="Password" />
       </InputContainer>
-      <Button>Login</Button>
+      <Button type="submit">Login</Button>
     </Form>
   );
 };

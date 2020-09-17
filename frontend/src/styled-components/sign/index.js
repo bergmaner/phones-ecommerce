@@ -4,7 +4,7 @@ export const SignForm = styled.div`
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  left: 75%;
+  left: ${(props) => (props.visible ? "25%" : "75%")};
   width: 50%;
   transition: 1s 0.7s ease-in-out;
   display: grid;
@@ -26,9 +26,12 @@ export const Container = styled.div`
     height: 2000px;
     width: 2000px;
     top: -10%;
-    right: 48%;
-    transform: translateY(-50%);
-    background-image: linear-gradient(-45deg, #743563 0%, #743563 100%);
+    z-index: 6;
+
+    right: ${(props) => (props.transform ? "52%" : "48%")};
+    transform: ${(props) =>
+      props.transform ? "translate(100%, -50%)" : "translateY(-50%)"};
+    background-image: linear-gradient(-45deg, #965785 0%, #965785 100%);
     transition: 1.8s ease-in-out;
     border-radius: 50%;
   }
@@ -51,6 +54,8 @@ export const Form = styled.form`
   padding: 0 5rem;
   grid-column: 1/2;
   grid-row: 1/2;
+  transition: 1s 0.7s ease-in-out;
+  transition-delay: 0.6s;
   z-index: ${(props) => (props.visible ? 2 : 1)};
   opacity: ${(props) => (props.visible ? 1 : 0)};
 `;
@@ -97,7 +102,7 @@ export const Button = styled.button`
   border: ${(props) => (props.transparent ? "2px solid white" : "none")};
   border-radius: 49px;
   cursor: pointer;
-  background: #743563;
+  background: #965785;
   margin: 10px 0;
   color: #fff;
   text-transform: uppercase;
@@ -112,6 +117,7 @@ export const ContentContainer = styled.div`
   color: #fff;
   transition: transform 0.9s ease-in-out;
   transition-delay: 0.6s;
+  z-index: 6;
   h3 {
     font-weight: 600;
     line-height: 1;
@@ -130,22 +136,27 @@ export const ContentWrapper = styled.div`
   align-items: flex-end;
   justify-content: space-around;
   text-align: center;
-  z-index: 6;
-  pointer-events: ${(props) => (props.direction === "left" ? "all" : "none")};
   padding: ${(props) =>
     props.direction === "left" ? "3rem 17% 2rem 12%" : "3rem 12% 2rem 17%"};
 
-    ${ContentContainer}{
-      transform: ${props => props.direction === "left" ? "translateX(0)" : "translateX(800px)"};
-    }
-
-  img {
-    width: 100%;
-    transform: ${props => props.direction === "left" ? "translateX(0)" : "translateX(800px)"};
+  ${ContentContainer}, svg {
+    transform: ${(props) =>
+      props.direction === "left"
+        ? props.transform
+          ? "translateX(-800px)"
+          : "translateX(0)"
+        : props.transform
+        ? "translateX(0)"
+        : "translateX(800px)"};
   }
+
+  svg {
+    width: 300px;
+    transition: transform 0.9s ease-in-out;
+    transition-delay: 0.6s;
+    z-index: 6;
+    margin:auto;
 `;
-
-
 
 export const SignContents = styled.div`
   position: absolute;
