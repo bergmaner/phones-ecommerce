@@ -36,4 +36,5 @@ export const Account = styled.div`
 export const SLink = styled(Link)`
   text-decoration: none;
   color: #000;
+  font-weight: 700;
 `;

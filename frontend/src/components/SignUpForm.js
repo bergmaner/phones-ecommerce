@@ -1,6 +1,6 @@
 import React from "react";
 import { FaUser, FaLock,FaEnvelope } from "react-icons/fa";
-import { Form, InputContainer, Title, Button } from "../styled-components/form";
+import { Form, InputContainer, Title, Button } from "../styled-components/sign";
 
 const SignUpForm = () => {
   return (
