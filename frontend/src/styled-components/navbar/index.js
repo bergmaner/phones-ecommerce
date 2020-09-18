@@ -6,10 +6,7 @@ export const NavWrapper = styled.div`
   z-index: 7;
   width: 100%;
   box-sizing: border-box;
-  padding-top: 2.5vw;
-  padding-bottom: 2.5vw;
-  padding-left: 4vw;
-  padding-right: 4vw;
+  padding: 2.5vw 4vw;
   pointer-events: auto;
 `;
 

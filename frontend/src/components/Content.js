@@ -6,6 +6,7 @@ import {
 } from "../styled-components/sign/index";
 import Login from "./Login";
 import Register from "./Register";
+import { animateScroll as scroll } from "react-scroll";
 
 const Content = ({
   direction,
@@ -17,6 +18,9 @@ const Content = ({
 }) => {
   const handleChangeSign = () => {
     option === "Sign up" ? setSignUp(true) : setSignUp(false);
+    option === "Sign up" ? 
+    scroll.scrollToTop() : scroll.scrollToBottom({
+      duration: 2000});
   };
 
   return (

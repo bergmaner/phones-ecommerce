@@ -32,7 +32,7 @@ const SignUpForm = ({ signUp }) => {
       return response.json()
     }).catch(err => {
       console.log(err)
-    })
+    });
   };
 
   console.log(values);
@@ -45,6 +45,7 @@ const SignUpForm = ({ signUp }) => {
           onChange={handleChange("name")}
           type="text"
           placeholder="Username"
+          value={name}
         />
       </InputContainer>
       <InputContainer>
@@ -53,6 +54,7 @@ const SignUpForm = ({ signUp }) => {
           onChange={handleChange("email")}
           type="email"
           placeholder="Email"
+          value={email}
         />
       </InputContainer>
       <InputContainer>
@@ -61,6 +63,7 @@ const SignUpForm = ({ signUp }) => {
           onChange={handleChange("password")}
           type="password"
           placeholder="Password"
+          value={password}
         />
       </InputContainer>
       <Button>Register</Button>
