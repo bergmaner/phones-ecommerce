@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Form, InputContainer, Title, Button, Information } from "../styled-components/sign";
+import {Link} from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
-import { Form, InputContainer, Title, Button } from "../styled-components/sign";
 
 const SignUpForm = ({ signUp }) => {
   const [values, setValues] = useState({
@@ -11,10 +12,10 @@ const SignUpForm = ({ signUp }) => {
     success: false,
   });
 
-  const { name, email, password } = values;
+  const { name, email, password, error, success } = values;
 
   const handleChange = (name) => (e) => {
-    setValues({ ...values, [name]: e.target.value, error: false });
+    setValues({ ...values, [name]: e.target.value, error: ""});
   };
 
   const handleSubmit = (e) => {
@@ -32,6 +33,11 @@ const SignUpForm = ({ signUp }) => {
       return response.json()
     }).catch(err => {
       console.log(err)
+    }).then(data=>{
+      if(data.error) setValues({...values, error: data.error, success: false });
+      else{
+        setValues({...values, name:"", email: "", password: "", error: "", success: true });
+      }
     });
   };
 
@@ -66,6 +72,7 @@ const SignUpForm = ({ signUp }) => {
           value={password}
         />
       </InputContainer>
+      <Information success={success}>{success ? "You Signed Up succesfully.Go Sign In" : error}</Information>
       <Button>Register</Button>
     </Form>
   );

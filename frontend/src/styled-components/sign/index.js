@@ -223,3 +223,9 @@ export const SignContents = styled.div`
     grid-template-rows: 1fr 2fr 1fr;
   }
 `;
+
+export const Information = styled.div`
+  color: ${props => props.success ? "#0e6b0e !important" : "#f44336"};
+  font-weight: 600;
+  min-height: 21px;
+`;
