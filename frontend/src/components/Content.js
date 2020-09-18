@@ -20,7 +20,7 @@ const Content = ({
   };
 
   return (
-    <ContentWrapper transform={signUp} direction={direction}>
+    <ContentWrapper transform={signUp ? 1 : 0} direction={direction}>
       <ContentContainer>
         <h3>{title}</h3>
         <p>{description}</p>

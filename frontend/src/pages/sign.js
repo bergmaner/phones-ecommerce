@@ -10,7 +10,7 @@ const Sign = () => {
   console.log(signUp)
   return (
     <Layout>
-      <Container transform={signUp}>
+      <Container transform={signUp ? 1 : 0}>
         <FormsContainer>
           <SignForm visible={signUp}>
             <SignInForm signUp={signUp} />
