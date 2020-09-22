@@ -1,3 +1,6 @@
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+
 export const authenticate = (data, next) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("JWT", JSON.stringify(data));
@@ -64,3 +67,39 @@ export const isAuthenticated = () => {
     return JSON.parse(localStorage.getItem("JWT"));
   } else return false;
 };
+
+export const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/signin-or-signup",
+            state: { from: props.location },
+          }}
+        />
+      )
+    }
+  ></Route>
+);
+
+export const AdminRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuthenticated() && isAuthenticated().user.role === 1 ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/signin-or-signup",
+              state: { from: props.location },
+            }}
+          />
+        )
+      }
+    ></Route>
+  );

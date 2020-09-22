@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import {
   Form,
   InputContainer,
@@ -7,7 +9,7 @@ import {
   Button,
   Information,
 } from "../styled-components/sign";
-import { authenticate, signin } from "../helpers/auth";
+import { authenticate, signin, isAuthenticated } from "../helpers/auth";
 
 const SignInForm = ({ signUp }) => {
   const [values, setValues] = useState({
@@ -17,8 +19,9 @@ const SignInForm = ({ signUp }) => {
     loading: false,
     redirect: false,
   });
-
-  const { email, password, error, loading } = values;
+  let history = useHistory();
+  const { user } = isAuthenticated();
+  const { email, password, error, loading, redirect } = values;
 
   const handleChange = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value, error: "" });
@@ -38,6 +41,17 @@ const SignInForm = ({ signUp }) => {
         authenticate(data, () => setValues({ ...values, redirect: true }));
       }
     });
+  };
+
+  const redirectUser = () => {
+    if (redirect) {
+      if (user && user.role === 1) {
+        return <Redirect to="/dashboard/admin" />;
+      } else return <Redirect to="/dashboard/user" />;
+    }
+    if (isAuthenticated()) {
+      history.push("/");
+    }
   };
 
   return (
@@ -62,6 +76,7 @@ const SignInForm = ({ signUp }) => {
         />
       </InputContainer>
       <Information succes={!error}>{error}</Information>
+      {redirectUser(user)}
       <Button type="submit">Login</Button>
     </Form>
   );

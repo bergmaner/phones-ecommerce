@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import {
   SLink,
   NavContainer,
@@ -13,6 +13,9 @@ import { useHistory } from "react-router-dom";
 const Navbar = () => {
   let history = useHistory();
   console.log(history);
+
+
+
   return (
     <NavWrapper>
       <NavContainer>
@@ -21,7 +24,8 @@ const Navbar = () => {
             <SLink to="/">Phonez</SLink>
           </Title>
           <SLink to="/products">Products</SLink>
-          <SLink to="/informations">Informations</SLink>
+         {isAuthenticated()?.user?.role === 1 &&<SLink to="/dashboard/admin">Dashboard</SLink>}
+         {isAuthenticated()?.user?.role === 0 &&<SLink to="/dashboard/user">Dashboard</SLink>}
           <SLink to="/contact">Contact</SLink>
 
           {!isAuthenticated() ? (
@@ -30,7 +34,7 @@ const Navbar = () => {
               <SLink to="/signin-or-signup">Sign Up</SLink>
             </Account>
           ) : (
-            <div onClick={() => signout(() => history.push("/"))}>Sign Out</div>
+            <div onClick={() => signout(() => history.push("/signin-or-signup"))}>Sign Out</div>
           )}
         </NavItems>
       </NavContainer>
