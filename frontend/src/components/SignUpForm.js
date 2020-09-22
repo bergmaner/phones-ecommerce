@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, InputContainer, Title, Button, Information } from "../styled-components/sign";
+import { signup } from "../helpers/auth";
 import {Link} from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 
@@ -20,20 +21,7 @@ const SignUpForm = ({ signUp }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}/signUp`,{
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true'
-      },
-      body: JSON.stringify({name,email,password})
-    }).then((response)=> {
-      return response.json()
-    }).catch(err => {
-      console.log(err)
-    }).then(data=>{
+ signup({name,email,password}).then(data=>{
       if(data.error) setValues({...values, error: data.error, success: false });
       else{
         setValues({...values, name:"", email: "", password: "", error: "", success: true });
