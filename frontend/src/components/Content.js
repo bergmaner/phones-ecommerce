@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  Button,
-  ContentContainer,
-  ContentWrapper,
-} from "../styled-components/sign/index";
+import { ContentContainer, ContentWrapper } from "../styled-components/sign";
+import { Button } from "../styled-components/reusable";
 import Login from "./Login";
 import Register from "./Register";
 import { animateScroll as scroll } from "react-scroll";
@@ -18,9 +15,11 @@ const Content = ({
 }) => {
   const handleChangeSign = () => {
     option === "Sign up" ? setSignUp(true) : setSignUp(false);
-    option === "Sign up" ? 
-    scroll.scrollToTop() : scroll.scrollToBottom({
-      duration: 2000});
+    option === "Sign up"
+      ? scroll.scrollToTop()
+      : scroll.scrollToBottom({
+          duration: 2000,
+        });
   };
 
   return (

@@ -7,6 +7,7 @@ export const authenticate = (data, next) => {
     next();
   }
 };
+
 export const signup = (user) => {
   return fetch(`${process.env.REACT_APP_API_URL}/signUp`, {
     method: "POST",
@@ -87,19 +88,19 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 export const AdminRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated() && isAuthenticated().user.role === 1 ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/signin-or-signup",
-              state: { from: props.location },
-            }}
-          />
-        )
-      }
-    ></Route>
-  );
+  <Route
+    {...rest}
+    render={(props) =>
+      isAuthenticated() && isAuthenticated().user.role === 1 ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/signin-or-signup",
+            state: { from: props.location },
+          }}
+        />
+      )
+    }
+  ></Route>
+);

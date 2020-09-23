@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React from "react";
 import {
   SLink,
   NavContainer,
@@ -6,6 +6,7 @@ import {
   NavItems,
   Title,
   Account,
+  Signout
 } from "../styled-components/navbar";
 import { signout, isAuthenticated } from "../helpers/auth";
 import { useHistory } from "react-router-dom";
@@ -34,7 +35,7 @@ const Navbar = () => {
               <SLink to="/signin-or-signup">Sign Up</SLink>
             </Account>
           ) : (
-            <div onClick={() => signout(() => history.push("/signin-or-signup"))}>Sign Out</div>
+            <Signout onClick={() => signout(() => history.push("/signin-or-signup"))}>Sign Out</Signout>
           )}
         </NavItems>
       </NavContainer>

@@ -65,82 +65,6 @@ export const FormsContainer = styled.div`
   left: 0;
 `;
 
-export const Form = styled.form`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 0 5rem;
-  grid-column: 1/2;
-  grid-row: 1/2;
-  transition: 1s 0.7s ease-in-out;
-  transition-delay: 0.6s;
-  z-index: ${(props) => (props.visible ? 2 : 1)};
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  @media (max-width: 559px) {
-    padding: 0 1.5rem;
-  }
-`;
-
-export const InputContainer = styled.div`
-  max-width: 380px;
-  width: 100%;
-  height: 55px;
-  background-color: #f0f0f0;
-  margin: 10px 0;
-  border-radius: 55px;
-  display: grid;
-  grid-template-columns: 15% 85%;
-  padding: 0.4rem;
-  svg {
-    margin: auto;
-    color: #555;
-    font-size: 1.5rem;
-  }
-
-  input {
-    background: none;
-    outline: none;
-    border: none;
-    line-height: 1;
-    font-weight: 600;
-    color: #555;
-    ::placeholder {
-      color: #aaa;
-    }
-  }
-`;
-
-export const Title = styled.h2`
-  font-size: 2.2rem;
-  color: #555;
-  margin-bottom: 10px;
-`;
-
-export const Button = styled.button`
-  width: 150px;
-  height: 49px;
-  outline: none;
-  border: ${(props) => (props.transparent ? "2px solid white" : "none")};
-  border-radius: 49px;
-  cursor: pointer;
-  background: #965785;
-  margin: 10px 0;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 600;
-  transition: 0.5s;
-  :hover {
-    background: #ee9944;
-  }
-  @media (max-width: 849px) {
-    width: ${(props) => props.transparent && "110px"};
-    height: ${(props) => props.transparent && "35px"};
-    font-size: ${(props) => props.transparent && "0.75rem"};
-  }
-`;
-
 export const ContentContainer = styled.div`
   color: #fff;
   transition: transform 0.9s ease-in-out;
@@ -222,10 +146,4 @@ export const SignContents = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 1fr;
   }
-`;
-
-export const Information = styled.div`
-  color: ${props => props.success ? "#0e6b0e !important" : "#f44336"};
-  font-weight: 600;
-  min-height: 21px;
 `;

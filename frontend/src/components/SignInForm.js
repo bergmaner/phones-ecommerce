@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-import {
-  Form,
-  InputContainer,
-  Title,
-  Button,
-  Information,
-} from "../styled-components/sign";
+import { Form, Title, Information, InputContainer, Button } from "../styled-components/reusable";
 import { authenticate, signin, isAuthenticated } from "../helpers/auth";
 
 const SignInForm = ({ signUp }) => {

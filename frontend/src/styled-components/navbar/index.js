@@ -6,7 +6,7 @@ export const NavWrapper = styled.div`
   z-index: 7;
   width: 100%;
   box-sizing: border-box;
-  padding: 2.5vw 4vw;
+  padding: 20px 30px;
   pointer-events: auto;
 `;
 
@@ -14,6 +14,11 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const Signout = styled.div`
+  cursor: pointer;
+  font-weight: 700;
 `;
 
 export const NavItems = styled.div`

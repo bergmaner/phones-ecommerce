@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Form, InputContainer, Title, Button, Information } from "../styled-components/sign";
+import { Form, InputContainer,Title, Information, Button } from "../styled-components/reusable";
 import { signup } from "../helpers/auth";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 
 const SignUpForm = ({ signUp }) => {
@@ -16,15 +16,23 @@ const SignUpForm = ({ signUp }) => {
   const { name, email, password, error, success } = values;
 
   const handleChange = (name) => (e) => {
-    setValues({ ...values, [name]: e.target.value, error: ""});
+    setValues({ ...values, [name]: e.target.value, error: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
- signup({name,email,password}).then(data=>{
-      if(data.error) setValues({...values, error: data.error, success: false });
-      else{
-        setValues({...values, name:"", email: "", password: "", error: "", success: true });
+    signup({ name, email, password }).then((data) => {
+      if (data.error)
+        setValues({ ...values, error: data.error, success: false });
+      else {
+        setValues({
+          ...values,
+          name: "",
+          email: "",
+          password: "",
+          error: "",
+          success: true,
+        });
       }
     });
   };
@@ -60,7 +68,9 @@ const SignUpForm = ({ signUp }) => {
           value={password}
         />
       </InputContainer>
-      <Information success={success}>{success ? "You Signed Up succesfully.Go Sign In" : error}</Information>
+      <Information success={success}>
+        {success ? "You Signed Up succesfully.Go Sign In" : error}
+      </Information>
       <Button>Register</Button>
     </Form>
   );
