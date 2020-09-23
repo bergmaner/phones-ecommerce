@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Title = styled.h2`
   font-size: 2.2rem;
   color: #555;
-  margin-bottom: 10px;
+  margin: 10px 0 ;
   text-align: center;
 `;
 
@@ -18,6 +18,18 @@ export const Container = styled.div`
   justify-content: space-around;
   flex-direction: column;
   min-height: calc(100vh - 61px);
+`;
+
+export const Row = styled.div`
+min-width: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 849px) {
+    flex-direction: column;
+    min-width: 0;
+    width:100%;
+  }
 `;
 
 export const Form = styled.form`
@@ -46,7 +58,7 @@ export const InputContainer = styled.div`
   margin: 10px 0;
   border-radius: 55px;
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: ${(props) => (props.noIco ? "100%" : "15% 85%")};
   padding: 0.4rem;
   svg {
     margin: auto;
@@ -54,7 +66,19 @@ export const InputContainer = styled.div`
     font-size: 1.5rem;
   }
 
-  input {
+  select {
+    width: calc(100% - 10px);
+    padding-left: 57px;
+    option {
+      background: #f0f0f0;
+      border: none;
+      outline: none;
+    }
+  }
+
+  input,
+  select {
+    margin: auto 0;
     background: none;
     outline: none;
     border: none;
