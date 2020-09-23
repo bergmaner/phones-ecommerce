@@ -21,14 +21,15 @@ export const Container = styled.div`
 `;
 
 export const Row = styled.div`
-min-width: 550px;
+max-width: 700px;
   display: flex;
   align-items: center;
+  width:100%;
+  margin: 10px 0;
   justify-content: space-between;
   @media (max-width: 849px) {
     flex-direction: column;
-    min-width: 0;
-    width:100%;
+    margin: 0;
   }
 `;
 
@@ -58,7 +59,7 @@ export const InputContainer = styled.div`
   margin: 10px 0;
   border-radius: 55px;
   display: grid;
-  grid-template-columns: ${(props) => (props.noIco ? "100%" : "15% 85%")};
+  grid-template-columns: 15% 85%;
   padding: 0.4rem;
   svg {
     margin: auto;
@@ -68,7 +69,6 @@ export const InputContainer = styled.div`
 
   select {
     width: calc(100% - 10px);
-    padding-left: 57px;
     option {
       background: #f0f0f0;
       border: none;

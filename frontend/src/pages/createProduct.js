@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../layout/Layout";
 import { isAuthenticated } from "../helpers/auth";
-import { MdFilterList } from "react-icons/md";
+import { createProduct, getAllCategories } from "../helpers/api";
+import {
+  FaEdit,
+  FaMoneyBill,
+  FaRegHandPeace,
+  FaShippingFast,
+  FaImage
+} from "react-icons/fa";
+import { ImPriceTag } from "react-icons/im";
 import {
   Form,
   InputContainer,
@@ -11,7 +19,6 @@ import {
   Title,
   Button,
 } from "../styled-components/reusable";
-import { createProduct } from "../helpers/api";
 
 const CreateProduct = () => {
   const [values, setValues] = useState({
@@ -47,7 +54,12 @@ const CreateProduct = () => {
   } = values;
 
   useEffect(() => {
-    setValues({ ...values, formData: new FormData() });
+    getAllCategories().then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else
+        setValues({ ...values, categories: data, formData: new FormData() });
+    });
   }, []);
 
   const handleChange = (name) => (e) => {
@@ -90,7 +102,7 @@ const CreateProduct = () => {
           <Row>
             <h2>Name: </h2>
             <InputContainer>
-              <MdFilterList />
+              <FaEdit />
               <input
                 value={name}
                 placeholder="name"
@@ -102,7 +114,7 @@ const CreateProduct = () => {
           <Row>
             <h2>Description: </h2>
             <InputContainer>
-              <MdFilterList />
+              <FaEdit />
               <input
                 value={description}
                 placeholder="description"
@@ -114,7 +126,7 @@ const CreateProduct = () => {
           <Row>
             <h2>Price: </h2>
             <InputContainer>
-              <MdFilterList />
+              <FaMoneyBill />
               <input
                 type="number"
                 value={price}
@@ -126,17 +138,23 @@ const CreateProduct = () => {
           </Row>
           <Row>
             <h2>Category: </h2>
-            <InputContainer noIco>
+            <InputContainer>
+              <ImPriceTag />
               <select onChange={handleChange("category")}>
-                <option value={"5f5f812425eee53678c5ff76"}>Lipa</option>
-                <option value={"5f5f812425eee53678c5ff76"}>Nokia</option>
+                <option>Select Category</option>
+                {categories &&
+                  categories.map((cat) => (
+                    <option key={cat._id} value={cat._id}>
+                      {cat.name}
+                    </option>
+                  ))}
               </select>
             </InputContainer>
           </Row>
           <Row>
             <h2>Quantity: </h2>
             <InputContainer>
-              <MdFilterList />
+              <FaRegHandPeace />
               <input
                 type="number"
                 value={quantity}
@@ -148,8 +166,10 @@ const CreateProduct = () => {
           </Row>
           <Row>
             <h2>Shipping: </h2>
-            <InputContainer noIco>
+            <InputContainer>
+              <FaShippingFast />
               <select onChange={handleChange("shipping")}>
+                <option>Select Option</option>
                 <option value={0}>No</option>
                 <option value={1}>Yes</option>
               </select>
@@ -158,7 +178,7 @@ const CreateProduct = () => {
           <Row>
             <h2>Image: </h2>
             <InputContainer>
-              <MdFilterList />
+              <FaImage/>
               <input
                 onChange={handleChange("image")}
                 type="file"
@@ -166,7 +186,7 @@ const CreateProduct = () => {
               />
             </InputContainer>
           </Row>
-          <Button>Add</Button>
+          <Button>Add Product</Button>
         </Form>
       </Container>
     </Layout>

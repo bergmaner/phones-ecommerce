@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../layout/Layout";
 import { isAuthenticated } from "../helpers/auth";
-import { MdFilterList } from "react-icons/md";
+import { ImPriceTag } from "react-icons/im";
 import {
   Form,
   InputContainer,
@@ -37,7 +37,7 @@ const CreateCategory = () => {
         <Title>Create Category</Title>
         <Form onSubmit={handleSubmit} visible={true}>
           <InputContainer>
-            <MdFilterList />
+            <ImPriceTag/>
             <input
               value={name}
               placeholder="category"
@@ -55,7 +55,7 @@ const CreateCategory = () => {
           <Information success={success}>
             {success ? `Category "${name}" is created succesfully ` : error}
           </Information>
-          <Button>Add</Button>
+          <Button>Add Category</Button>
         </Form>
       </Container>
     </Layout>

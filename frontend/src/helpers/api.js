@@ -1,4 +1,4 @@
-export const createCategory = ( user, token, category ) => {
+export const createCategory = (user, token, category) => {
   return fetch(`${process.env.REACT_APP_API_URL}/category/create/${user._id}`, {
     method: "POST",
     headers: {
@@ -18,7 +18,7 @@ export const createCategory = ( user, token, category ) => {
     });
 };
 
-export const createProduct = ( user, token, product ) => {
+export const createProduct = (user, token, product) => {
   return fetch(`${process.env.REACT_APP_API_URL}/product/create/${user._id}`, {
     method: "POST",
     headers: {
@@ -35,4 +35,27 @@ export const createProduct = ( user, token, product ) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const getAllCategories = () => {
+  return fetch(`${process.env.REACT_APP_API_URL}/categories`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getProducts = (sortBy) => {
+  return fetch(
+    `${process.env.REACT_APP_API_URL}/products?sortBy=${sortBy}&order=desc&limit=6`,
+    {
+      method: "GET",
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
 };
