@@ -92,14 +92,15 @@ export const InputContainer = styled.div`
   }
 `;
 export const Button = styled.button`
-  width: 150px;
-  height: 49px;
+  width:${(props) => props.small ? "110px" :  "150px" };
+  height: ${(props) => props.small ? "35px" : "49px" };
+  font-size: ${(props) => props.small && "0.75rem"};
   outline: none;
   border: ${(props) => (props.transparent ? "2px solid white" : "none")};
   border-radius: 49px;
   cursor: pointer;
   background: #965785;
-  margin: 10px 0;
+  margin: 5px 0;
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
@@ -107,9 +108,5 @@ export const Button = styled.button`
   :hover {
     background: #ee9944;
   }
-  @media (max-width: 849px) {
-    width: ${(props) => props.transparent && "110px"};
-    height: ${(props) => props.transparent && "35px"};
-    font-size: ${(props) => props.transparent && "0.75rem"};
-  }
+
 `;

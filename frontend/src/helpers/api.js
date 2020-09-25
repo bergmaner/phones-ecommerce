@@ -59,3 +59,11 @@ export const getProducts = (sortBy) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const getImageUrl = (item, url) => {
+  return `${process.env.REACT_APP_API_URL}/${url}/photo/${item._id}`
+}
+
+export const getShortDescription = (description) => {
+  return description.length > 120 ? description.slice(0,120).concat(" ...") : description;
+}

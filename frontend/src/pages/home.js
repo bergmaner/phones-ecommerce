@@ -1,31 +1,34 @@
-import React, {useState, useEffect} from "react";
-import {getProducts} from "../helpers/api";
+import React, { useState, useEffect } from "react";
+import { getProducts } from "../helpers/api";
 import Layout from "../layout/Layout";
+import ProductCard from "../components/ProductCard";
+import { ProductsList } from "../styled-components/product";
 
 const Home = () => {
-
-const [products, setProducts] = useState([]);
-const [error, setError] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(false);
 
   const loadProductsBy = (orderBy) => {
-    getProducts(orderBy).then((data)=>{
-      if(data.error){
+    getProducts(orderBy).then((data) => {
+      if (data.error) {
         setError(true);
-      }
-      else {
+      } else {
         setProducts(data);
       }
-    })
-  }
+    });
+  };
 
-useEffect(()=>{
-  loadProductsBy('sold');
-},[])
+  useEffect(() => {
+    loadProductsBy("sold");
+  }, []);
 
   return (
     <Layout title="Phonez" description="E-commerce shop">
-      {JSON.stringify(products)}
-      Home
+      <ProductsList>
+      {products.map((product) => (
+       <ProductCard key={product._id} product = {product}/>
+      ))}
+      </ProductsList>
     </Layout>
   );
 };

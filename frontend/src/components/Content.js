@@ -27,7 +27,7 @@ const Content = ({
       <ContentContainer>
         <h3>{title}</h3>
         <p>{description}</p>
-        <Button onClick={() => handleChangeSign()} transparent>
+        <Button onClick={() => handleChangeSign()} small transparent>
           {option}
         </Button>
       </ContentContainer>
