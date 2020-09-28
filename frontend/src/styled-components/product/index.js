@@ -35,8 +35,8 @@ export const Card = styled.div`
     background: #965785;
     clip-path: circle(150px at 80% 20%);
     transition: 0.5s ease-in-out;
-    @media(max-width: 672px){
-        clip-path: circle(300px at 80% -20%);
+    @media (max-width: 672px) {
+      clip-path: circle(300px at 80% -20%);
     }
   }
   ::after {
@@ -51,8 +51,8 @@ export const Card = styled.div`
   }
   :hover:before {
     clip-path: circle(300px at 80% -20%);
-    @media(max-width: 672px){
-        clip-path: circle(600px at 80% -60%);
+    @media (max-width: 672px) {
+      clip-path: circle(600px at 80% -60%);
     }
   }
   :hover ${ImageContainer} {
@@ -83,13 +83,99 @@ export const Content = styled.div`
 
 export const BuyContainer = styled.div`
   display: flex;
-  justify-content : space-around;
+  justify-content: space-around;
   align-items: center;
 `;
 
 export const ProductsList = styled.div`
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-grid-auto-rows: auto;
-grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+`;
+
+export const FilterHeader = styled.h2`
+  position: relative;
+  font-size: 18px;
+  :after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #000;
+    border-radius: 10px;
+  }
+`;
+
+export const CategoryList = styled.ul`
+  margin: 10px;
+  min-height: 221px;
+  padding: 10px;
+  position: relative;
+  background: #eee;
+  min-width: 200px;
+  border-radius: 20px;
+  h2{
+    margin-top: 0px;
+  }
+  li {
+    position: relative;
+    list-style-type: none;
+    label{
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+    input {
+      position: absolute;
+      cursor:pointer;
+      opacity: 0;
+      :checked ~ span:after {
+        display: block;
+      }
+    }
+    span{
+   
+      position: absolute;
+      top: 60%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 15px;
+      width: 15px;
+      transition: background 0.2s;
+      background-color: #eee;
+      border-radius: 50%;
+      :after {
+        content: "";
+        position: absolute;
+        display: none;
+         transition: background 0.2s;
+        top: 5px;
+        left: 5px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: white;
+      }
+      }
+    }
+    input ~ span {
+      background-color: #fff;
+      border: 1px #666 solid;
+    }
+    input:checked ~ span {
+      background-color: #965785;
+    }
+    
+  }
+`;
+
+export const ProductsContainer = styled.div`
+display: flex;
+align-items: flex-start;
 `;

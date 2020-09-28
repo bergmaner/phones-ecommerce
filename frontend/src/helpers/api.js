@@ -61,9 +61,35 @@ export const getProducts = (sortBy) => {
 };
 
 export const getImageUrl = (item, url) => {
-  return `${process.env.REACT_APP_API_URL}/${url}/photo/${item._id}`
-}
+  return `${process.env.REACT_APP_API_URL}/${url}/photo/${item._id}`;
+};
 
 export const getShortDescription = (description) => {
-  return description.length > 120 ? description.slice(0,120).concat(" ...") : description;
-}
+  return description.length > 120
+    ? description.slice(0, 120).concat(" ...")
+    : description;
+};
+
+export const getFilteredProducts = (skip, limit, filters = {}) => {
+  const data = {
+    limit,
+    skip,
+    filters,
+  };
+  return fetch(`${process.env.REACT_APP_API_URL}/products/by/search/`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
