@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../helpers/api";
 import Layout from "../layout/Layout";
 import ProductCard from "../components/ProductCard";
+import Searchbar from "../components/Searchbar";
 import { ProductsList } from "../styled-components/product";
 
 const Home = () => {
@@ -24,10 +25,12 @@ const Home = () => {
 
   return (
     <Layout title="Phonez" description="E-commerce shop">
+      <Searchbar />
+      <h1>New Products</h1>
       <ProductsList>
-      {products.map((product) => (
-       <ProductCard key={product._id} product = {product}/>
-      ))}
+        {products.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
       </ProductsList>
     </Layout>
   );

@@ -162,7 +162,7 @@ exports.list = (req, res) => {
 };
 
 exports.relatedList = (req, res) => {
-  let limit = req.query.limit ? parseInt(req.query.limit) : 8;
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
 
   Product.find({ _id: { $ne: req.product }, category: req.product.category })
     .limit(limit)
@@ -236,3 +236,24 @@ exports.image = (req, res, next) => {
   }
   next();
 };
+
+exports.searchQuery = (req, res) => {
+  const query={};
+
+  if(req.query.search){
+    query.name = {$regex: req.query.search, $options: 'i'}
+  }
+  if(req.query.category && req.query.category === "All"){
+    query.category = req.query.category;
+  }
+
+  Product.find(query, (err, products) => {
+    if(err) {
+      return res.status(400).json({
+        error: errorHandler(err)
+      })
+    }
+    return res.json(products);
+  })
+
+}

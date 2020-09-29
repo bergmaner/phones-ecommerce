@@ -1,3 +1,5 @@
+import queryString from "query-string";
+
 export const createCategory = (user, token, category) => {
   return fetch(`${process.env.REACT_APP_API_URL}/category/create/${user._id}`, {
     method: "POST",
@@ -92,4 +94,16 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const searchQuery = (params) => {
+  const query = queryString.stringify(params);
+  console.log("qqqqq", query)
+  return fetch(`${process.env.REACT_APP_API_URL}/products/search?${query}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
 };
