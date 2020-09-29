@@ -7,7 +7,7 @@ export const prices = [
     {
         _id: 1,
         name: "0-499 PLN",
-        range: [0, 499]
+        range: [400, 499]
     },
     {
         _id: 2,
@@ -27,6 +27,6 @@ export const prices = [
     {
         _id: 5,
         name: "More than 2000 PLN",
-        range: [2000, 99999]
+        range: [2000, 2500]
     },
 ]

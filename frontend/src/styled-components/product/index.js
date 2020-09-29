@@ -88,6 +88,7 @@ export const BuyContainer = styled.div`
 `;
 
 export const ProductsList = styled.div`
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-auto-rows: auto;
@@ -109,16 +110,21 @@ export const FilterHeader = styled.h2`
   }
 `;
 
-export const CategoryList = styled.ul`
-  margin: 10px;
-  min-height: 221px;
-  padding: 10px;
+export const CategoryList = styled.div`
   position: relative;
-  background: #eee;
-  min-width: 200px;
-  border-radius: 20px;
+  min-width: 230px;
+  @media(max-width: 600px){
+    width:100%;
+  }
   h2{
     margin-top: 0px;
+  }
+  ul{
+  border-radius: 20px;
+  margin: 0px 10px 10px 10px;
+  min-height: 221px;
+  padding: 10px;
+  background: #f0f0f0;
   }
   li {
     position: relative;
@@ -148,7 +154,7 @@ export const CategoryList = styled.ul`
       height: 15px;
       width: 15px;
       transition: background 0.2s;
-      background-color: #eee;
+      background: #f0f0f0;
       border-radius: 50%;
       :after {
         content: "";
@@ -176,6 +182,16 @@ export const CategoryList = styled.ul`
 `;
 
 export const ProductsContainer = styled.div`
-display: flex;
-align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
+  @media(max-width: 600px){
+    flex-direction: column;
+  }
+`;
+
+export const LoadContainer = styled.div`
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -18,7 +18,7 @@ const CheckboxList = ({ categories, handleFilter }) => {
   };
 console.log(checked)
   return (
-    <>
+    <ul>
       <FilterHeader>Filter by categories</FilterHeader>
       {categories.map((category) => (
         <li key={category._id}>
@@ -29,7 +29,7 @@ console.log(checked)
           </label>
         </li>
       ))}
-    </>
+    </ul>
   );
 };
 export default CheckboxList;

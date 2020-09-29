@@ -9,7 +9,7 @@ const PricesRange = ({ handleFilter }) => {
     setValue(e.target.value);
   };
   return (
-    <>
+    <ul>
       <FilterHeader>Prices</FilterHeader>
       {prices.map((price, id) => (
         <li key={price._id}>
@@ -25,7 +25,7 @@ const PricesRange = ({ handleFilter }) => {
           </label>
         </li>
       ))}
-    </>
+    </ul>
   );
 };
 export default PricesRange;

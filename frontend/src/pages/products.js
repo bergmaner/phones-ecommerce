@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import Layout from "../layout/Layout";
 import { getAllCategories, getFilteredProducts } from "../helpers/api";
 import CheckboxList from "../components/CheckboxList";
-import { ProductsContainer, CategoryList } from "../styled-components/product";
+import ProductCard from "../components/ProductCard";
+import {
+  ProductsContainer,
+  CategoryList,
+  ProductsList,
+  LoadContainer,
+} from "../styled-components/product";
+import { Button } from "../styled-components/reusable";
 import { prices } from "../config";
 import PricesRange from "../components/PricesRange";
 
@@ -13,7 +20,8 @@ const Products = () => {
   });
   const [error, setError] = useState(false);
   const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(4);
+  const [size, setSize] = useState(0);
   const [filteredResults, setFilteredResults] = useState(0);
 
   useEffect(() => {
@@ -22,7 +30,7 @@ const Products = () => {
         setError(data.error);
       } else setCategories(data);
     });
-    loadFilterResults(skip,limit,filtersList.filters);
+    loadFilterResults(skip, limit, filtersList.filters);
   }, []);
 
   const handleFilter = (filters, filterBy) => {
@@ -49,13 +57,29 @@ const Products = () => {
   };
 
   const loadFilterResults = (newFilters) => {
-    console.log("ff",newFilters)
     getFilteredProducts(skip, limit, newFilters).then((data) => {
       if (data.error) setError(data.error);
-      else setFilteredResults(data);
+      else {
+        setFilteredResults(data);
+        setSize(data.size);
+        setSkip(0);
+      }
     });
   };
 
+  const loadMore = () => {
+    getFilteredProducts(limit + skip, limit, filtersList.filters).then(
+      (data) => {
+        if (data.error) setError(data.error);
+        else {
+          setFilteredResults({...filteredResults,data: [...filteredResults.data,...data.data]});
+          setSize(data.size);
+          setSkip(skip+limit);
+        }
+      }
+    );
+  };
+  console.log("res",filteredResults)
   console.log(filtersList);
   return (
     <Layout>
@@ -69,8 +93,15 @@ const Products = () => {
             handleFilter={(filters) => handleFilter(filters, "price")}
           />
         </CategoryList>
-        {JSON.stringify(filteredResults)}
+        <ProductsList>
+          {filteredResults?.data?.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </ProductsList>
       </ProductsContainer>
+      <LoadContainer>
+        {size > 0 && size >= limit && <Button onClick={() => loadMore()}>Load More</Button>}
+      </LoadContainer>
     </Layout>
   );
 };
