@@ -10,18 +10,22 @@ export const ImageContainer = styled.div`
   transition: 0.5s;
   img {
     position: absolute;
-    top: 40%;
+    top: ${(props) => (props.small ? "20%" : "40%")};
     left: 60%;
     transition: 0.5s ease-in-out;
-    transform: translate(-40%, -60%);
-    width: 270px;
+    transform: ${(props) =>
+      props.small ? "translate(-40%, -50%)" : "translate(-40%, -60%)"};
+    width: ${(props) => (props.small ? "100px" : "270px")};
   }
 `;
 
 export const Card = styled.div`
   position: relative;
+  color: #000 !important;
   width: 100%;
-  height: 500px;
+  height: ${(props) => (props.small ? "300px" : "550px")};
+  margin-top: ${(props) => props.isDescription && "40px"};
+  margin: ${(props) => props.small && "10px 0 10px 0"};
   background: #f0f0f0;
   border-radius: 20px;
   overflow: hidden;
@@ -33,26 +37,28 @@ export const Card = styled.div`
     width: 100%;
     height: 100%;
     background: #965785;
-    clip-path: circle(150px at 80% 20%);
+    clip-path: ${(props) =>
+      props.small ? "circle(150px at 80% 0%)" : "circle(150px at 80% 20%)"};
     transition: 0.5s ease-in-out;
     @media (max-width: 672px) {
-      clip-path: circle(300px at 80% -20%);
+      clip-path: ${ props => props.small ? "circle(150px at 80% 20%)" : "circle(300px at 80% -20%)"};
     }
   }
   ::after {
     content: "Phonez";
     position: absolute;
     top: 30%;
-    left: -10%;
-    font-size: 7em;
+    left: ${(props) => (props.small ? "-10px" : "-55px")};
+    font-size: ${(props) => (props.small ? "3em" : "7em")};
     font-weight: 700;
     font-style: italic;
     color: rgba(255, 255, 255, 0.75);
   }
   :hover:before {
-    clip-path: circle(300px at 80% -20%);
+    clip-path: ${(props) =>
+      props.small ? "circle(150px at 80% 15%)" : "circle(300px at 80% -20%)"};
     @media (max-width: 672px) {
-      clip-path: circle(600px at 80% -60%);
+      clip-path: ${ props => props.small ? "circle(300px at 80% -20%)" : "circle(600px at 80% -60%)" };
     }
   }
   :hover ${ImageContainer} {
@@ -66,14 +72,18 @@ export const Card = styled.div`
 
 export const Content = styled.div`
   position: absolute;
-  bottom: -5px;
+  bottom: 0px;
   width: 100%;
-  height: 180px;
+  height: ${props => props.small ? "180px" : "auto"};
   transition: 1s;
   z-index: 5;
   h2 {
     text-align: center;
     margin: 5px;
+    font-size: ${(props) => props.small && "16px !important"};
+  }
+  .title {
+    margin-top: ${(props) => props.small && "40px"};
   }
 
   div {
@@ -82,7 +92,9 @@ export const Content = styled.div`
 `;
 
 export const BuyContainer = styled.div`
+  transform: ${(props) => props.small && "translateY(30px)"};
   display: flex;
+  flex-direction: ${(props) => (props.small ? "column-reverse" : "row")};
   justify-content: space-around;
   align-items: center;
 `;
@@ -184,9 +196,34 @@ export const CategoryList = styled.div`
 export const ProductsContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  @media(max-width: 600px){
+  @media (max-width: 600px) {
     flex-direction: column;
   }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  @media(max-width: 672px){
+    flex-direction: column;
+  }
+`;
+
+export const RelatedList = styled.div`
+  width: 200px !important;
+  margin: 0 10px;
+  h2 {
+    margin: 0 0 10px 0;
+    text-align: center;
+    font-size: 25px;
+  }
+  @media(max-width: 672px){
+    width: 100% !important;
+    margin: 0;
+  }
+`;
+
+export const RelatedProductsContainer = styled.div`
+
 `;
 
 export const LoadContainer = styled.div`

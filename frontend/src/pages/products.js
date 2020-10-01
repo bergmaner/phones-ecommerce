@@ -12,6 +12,7 @@ import {
 import { Button } from "../styled-components/reusable";
 import { prices } from "../config";
 import PricesRange from "../components/PricesRange";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const [categories, setCategories] = useState([]);
@@ -20,9 +21,9 @@ const Products = () => {
   });
   const [error, setError] = useState(false);
   const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(6);
   const [size, setSize] = useState(0);
-  const [filteredResults, setFilteredResults] = useState(0);
+  const [filteredResults, setFilteredResults] = useState([]);
 
   useEffect(() => {
     getAllCategories().then((data) => {
@@ -72,16 +73,20 @@ const Products = () => {
       (data) => {
         if (data.error) setError(data.error);
         else {
-          setFilteredResults({...filteredResults,data: [...filteredResults.data,...data.data]});
+          setFilteredResults({
+            ...filteredResults,
+            data: [...filteredResults.data, ...data.data],
+          });
           setSize(data.size);
-          setSkip(skip+limit);
+          setSkip(skip + limit);
         }
       }
     );
   };
-  console.log("res",filteredResults)
+  console.log("res", filteredResults);
   console.log(filtersList);
   return (
+    filteredResults &&
     <Layout>
       <ProductsContainer>
         <CategoryList>
@@ -95,12 +100,16 @@ const Products = () => {
         </CategoryList>
         <ProductsList>
           {filteredResults?.data?.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <Link to={`/product/${product._id}`}>
+              <ProductCard key={product._id} product={product} />
+            </Link>
           ))}
         </ProductsList>
       </ProductsContainer>
       <LoadContainer>
-        {size > 0 && size >= limit && <Button onClick={() => loadMore()}>Load More</Button>}
+        {size > 0 && size >= limit && (
+          <Button onClick={() => loadMore()}>Load More</Button>
+        )}
       </LoadContainer>
     </Layout>
   );

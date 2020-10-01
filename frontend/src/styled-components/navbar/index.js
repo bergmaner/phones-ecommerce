@@ -31,8 +31,14 @@ export const NavItems = styled.div`
 export const Title = styled.div``;
 
 export const Account = styled.div`
-  text-align: center;
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
   font-size: 14px;
+  svg{
+    margin: 0 10px;
+    font-size: 20px;
+  }
 `;
 
 export const SLink = styled(Link)`

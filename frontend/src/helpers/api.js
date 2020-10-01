@@ -67,8 +67,8 @@ export const getImageUrl = (item, url) => {
 };
 
 export const getShortDescription = (description) => {
-  return description.length > 120
-    ? description.slice(0, 120).concat(" ...")
+  return description.length > 110
+    ? description.slice(0, 110).concat(" ...")
     : description;
 };
 
@@ -100,6 +100,26 @@ export const searchQuery = (params) => {
   const query = queryString.stringify(params);
   console.log("qqqqq", query)
   return fetch(`${process.env.REACT_APP_API_URL}/products/search?${query}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getProduct = (id) => {
+  return fetch(`${process.env.REACT_APP_API_URL}/product/${id}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getRelatedList = (id) => {
+  return fetch(`${process.env.REACT_APP_API_URL}/products/related/${id}`, {
     method: "GET",
   })
     .then((response) => {

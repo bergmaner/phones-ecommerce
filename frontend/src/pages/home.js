@@ -4,6 +4,7 @@ import Layout from "../layout/Layout";
 import ProductCard from "../components/ProductCard";
 import Searchbar from "../components/Searchbar";
 import { ProductsList } from "../styled-components/product";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -29,7 +30,9 @@ const Home = () => {
       <h1>New Products</h1>
       <ProductsList>
         {products.map((product) => (
+           <Link to={`/product/${product._id}`}>
           <ProductCard key={product._id} product={product} />
+          </Link>
         ))}
       </ProductsList>
     </Layout>
