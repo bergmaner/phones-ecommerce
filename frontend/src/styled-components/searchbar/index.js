@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-margin: 10px 0;
+margin: 20px 0;
 width: 100%;
 display: flex;
 justify-content: center;
@@ -104,7 +104,7 @@ export const DropdownMenu = styled.ul`
     > li > a {
       display: block;
       padding: 4px 12px;
-      color: #965785;
+      color: #000;
       font-size: 14px;
       line-height: 20px;
       text-decoration: none;

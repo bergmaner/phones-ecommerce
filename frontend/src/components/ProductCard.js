@@ -1,5 +1,7 @@
 import React from "react";
 import { getImageUrl, getShortDescription } from "../helpers/api";
+import { useHistory } from "react-router-dom";
+import { addItem } from "../helpers/cart";
 import { Button } from "../styled-components/reusable";
 import {
   Card,
@@ -11,8 +13,10 @@ import {
 
 const ProductCard = ({ small, product, isDescription }) => {
   const { _id, description, name, price } = product;
+  let history = useHistory();
   const handleClick = (e) => {
     e.preventDefault();
+    addItem(product, () => {history.push("/cart")});
   };
   return (
     product && (

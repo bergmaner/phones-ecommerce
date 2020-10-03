@@ -30,8 +30,8 @@ const Home = () => {
       <h1>New Products</h1>
       <ProductsList>
         {products.map((product) => (
-           <Link to={`/product/${product._id}`}>
-          <ProductCard key={product._id} product={product} />
+           <Link  key={product._id} to={`/product/${product._id}`}>
+          <ProductCard product={product} />
           </Link>
         ))}
       </ProductsList>
