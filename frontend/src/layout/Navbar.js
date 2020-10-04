@@ -17,7 +17,7 @@ import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   let history = useHistory();
-  console.log(history);
+  console.log(getTotalItems());
 
   return (
     <NavWrapper>
@@ -50,10 +50,14 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <MdShoppingCart />
-                {getTotalItems() !== 0 && (
-                  <CartNumber>{getTotalItems()}</CartNumber>
-                )}
+              <SLink to="/cart">
+               <CartContainer>
+                    <MdShoppingCart />
+                    {getTotalItems() !== 0 && (
+                      <CartNumber>{getTotalItems()}</CartNumber>
+                    )}
+                  </CartContainer>
+                  </SLink>
                 <Signout
                   onClick={() =>
                     signout(() => history.push("/signin-or-signup"))

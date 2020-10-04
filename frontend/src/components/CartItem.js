@@ -5,42 +5,61 @@ import {
   ControlButton,
   ImageContainer,
   ItemWrapper,
+  NameWrapper,
+  Count,
 } from "../styled-components/cart";
 import { IoMdTrash } from "react-icons/io";
 import { getImageUrl } from "../helpers/api";
-import { updateCount } from "../helpers/cart";
+import { updateCount, deleteItem } from "../helpers/cart";
 
-const CartItem = ({ product }) => {
+const CartItem = ({ product, setRun, run}) => {
   const { _id, name, price, quantity } = product;
   const [count, setCount] = useState(product.count);
+
   console.log(quantity, "quantity");
 
   const handleIncrement = () => {
-    setCount((c) => c + 1 );
-    updateCount(_id,count+1);
+    setRun(!run);
+    setCount((c) => c + 1);
+    updateCount(_id, count + 1);
   };
 
   const handleDecrement = () => {
+    setRun(!run);
+    setCount((c) => c - 1);
+    updateCount(_id, count - 1);
+  };
 
-    setCount((c) => c - 1 );
-    updateCount(_id,count-1);
+  const handleDelete = () => {
+    setRun(!run);
+    deleteItem(_id);
   };
 
   return (
     product && (
       <Item>
         <ControlsContainer>
-          <ControlButton disabled={count === quantity && true}  onClick={handleIncrement}>+</ControlButton>
-          <ControlButton disabled={count === 1 && true} onClick={handleDecrement}>-</ControlButton>
+          <ControlButton
+            disabled={count === quantity && true}
+            onClick={handleIncrement}
+          >
+            +
+          </ControlButton>
+          <ControlButton
+            disabled={count === 1 && true}
+            onClick={handleDecrement}
+          >
+            -
+          </ControlButton>
         </ControlsContainer>
         <ItemWrapper>
           <ImageContainer>
             <img src={getImageUrl(product, "product")} />
           </ImageContainer>
-          <h5>{name}</h5>
+          <NameWrapper>{name}</NameWrapper>
           <h5>{price} PLN</h5>
-          {count}
-          <ControlButton>
+          <Count>{count}</Count>
+          <ControlButton onClick={handleDelete}>
             <IoMdTrash />
           </ControlButton>
         </ItemWrapper>

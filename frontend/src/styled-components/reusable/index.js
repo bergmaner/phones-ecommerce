@@ -94,7 +94,7 @@ export const InputContainer = styled.div`
 export const Button = styled.button`
   width:${(props) => props.small ? "110px" :  "150px" };
   height: ${(props) => props.small ? "35px" : "49px" };
-  font-size: ${(props) => props.small && "0.75rem"};
+  font-size: ${(props) => props.small && "0.65rem"};
   outline: none;
   border: ${(props) => (props.transparent ? "2px solid white" : "none")};
   border-radius: 49px;
