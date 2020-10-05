@@ -17,7 +17,6 @@ import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   let history = useHistory();
-  console.log(getTotalItems());
 
   return (
     <NavWrapper>

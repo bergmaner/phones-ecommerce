@@ -127,3 +127,18 @@ export const getRelatedList = (id) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const getBraintreeClientToken = (id, token) => {
+  return fetch(`${process.env.REACT_APP_API_URL}/braintree/getToken/${id}`, {
+    method: "GET",
+    headers:{
+      Accept: "application/json",
+      "Content-Type": "aplication/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};

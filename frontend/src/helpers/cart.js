@@ -69,7 +69,8 @@ export const deleteItem = (productId) => {
 
         cart.map((product,i) => {
             if(product._id === productId){
-                cart.splice(cart[i],1);
+                console.log(i, "kkk");
+                cart.splice(i,1);
             }
         })
 

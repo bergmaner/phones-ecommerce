@@ -28,7 +28,10 @@ export const NavItems = styled.div`
   align-items: center;
 `;
 
-export const Title = styled.div``;
+export const Title = styled.div`
+font-weight: 700;
+font-style: italic;
+`;
 
 export const CartContainer = styled.span`
   display: inline-flex;
