@@ -89,3 +89,10 @@ export const getTotalPrice = () => {
     }
     return 0;
 }
+
+export const clearCart = () => {
+    if(typeof window !== "undefined" ){
+           localStorage.removeItem("cart");
+    }
+    return 0;
+}

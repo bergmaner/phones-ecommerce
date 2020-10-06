@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
 import CartItem from "../components/CartItem";
 import Layout from "../layout/Layout";
-import { getItems, getTotalItems, getTotalPrice } from "../helpers/cart";
+import { isAuthenticated } from "../helpers/auth";
+import {
+  getItems,
+  getTotalItems,
+  getTotalPrice,
+  clearCart,
+} from "../helpers/cart";
+import {
+  getBraintreeClientToken,
+  processPayment,
+  createOrder,
+} from "../helpers/api";
 import {
   Small,
   CartList,
@@ -16,8 +27,6 @@ import { Button } from "../styled-components/reusable";
 import Modal from "../components/Modal";
 import DropIn from "braintree-web-drop-in-react";
 import { useHistory } from "react-router-dom";
-import { isAuthenticated } from "../helpers/auth";
-import { getBraintreeClientToken } from "../helpers/api";
 
 const Cart = () => {
   const [isSignModalOpen, setSignModalOpen] = useState(false);
@@ -26,11 +35,12 @@ const Cart = () => {
   const [run, setRun] = useState(false);
   let history = useHistory();
   const [data, setData] = useState({
-    succes: false,
+    loading: false,
+    success: false,
     clientToken: false,
     error: "",
     instance: {},
-    adress: "",
+    address: "",
   });
 
   const userId = isAuthenticated() && isAuthenticated().user._id;
@@ -43,8 +53,57 @@ const Cart = () => {
     });
   };
 
+  const handleAddress = (e) => {
+    console.log(data.address);
+    console.log(deliveryAddress);
+    setData({ ...data, address: e.target.value });
+  };
+
   const onSignOpenModal = () => {
     !isAuthenticated() ? setSignModalOpen(true) : setCheckoutModalOpen(true);
+  };
+  let deliveryAddress = data.address;
+
+  const buy = () => {
+    setData({ ...data, loading: true });
+    let nonce;
+    let getNonce = data.instance
+      .requestPaymentMethod()
+      .then((data) => {
+        console.log(data, "data");
+        nonce = data.nonce;
+        console.log(getTotalPrice());
+        const paymentData = {
+          paymentMethodNonce: nonce,
+          amount: getTotalPrice(),
+        };
+        
+        processPayment(userId, token, paymentData)
+          .then((response) => {
+            console.log("es", response);
+            const orderData = {
+              products: items,
+              transaction_id: response.transaction.id,
+              amount: response.transaction.amount,
+              address: deliveryAddress,
+            };
+
+            createOrder(userId, token, orderData);
+
+            setData({ ...data, success: response.success });
+            setCheckoutModalOpen(false);
+            setRun(!run);
+            clearCart(() => {
+              setData({ ...data, loading: false });
+            });
+          })
+          .catch((error) => {
+            setData({ ...data, loading: false });
+          });
+      })
+      .catch((error) => {
+        setData({ ...data, error: error.message });
+      });
   };
 
   useEffect(() => {
@@ -87,11 +146,18 @@ const Cart = () => {
                     options={{
                       authorization: data.clientToken,
                     }}
+                    onInstance={(instance) => (data.instance = instance)}
                   />
                 </CheckoutWrapper>
+                Adress
+                <input value={data.address} onChange={handleAddress} />
                 <BuyContainer nopadding>
-                  <Button small>Cancel</Button>
-                  <Button small>Buy</Button>
+                  <Button onClick={() => setCheckoutModalOpen(false)} small>
+                    Cancel
+                  </Button>
+                  <Button onClick={buy} small>
+                    Buy
+                  </Button>
                 </BuyContainer>
               </div>
             )}
