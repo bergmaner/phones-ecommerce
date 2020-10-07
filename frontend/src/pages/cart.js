@@ -22,6 +22,8 @@ import {
   ModalContainer,
   Header,
   CheckoutWrapper,
+  AddressInput,
+  Label
 } from "../styled-components/cart";
 import { Button } from "../styled-components/reusable";
 import Modal from "../components/Modal";
@@ -142,6 +144,8 @@ const Cart = () => {
               <div>
                 <CheckoutWrapper>
                   <Header>Total Cost: {getTotalPrice()}</Header>
+                  <Label>Address</Label>
+                  <AddressInput placeholder="f.e ul.Nadbrzegowska 21D Bytów" value={data.address} onChange={handleAddress} />
                   <DropIn
                     options={{
                       authorization: data.clientToken,
@@ -149,8 +153,6 @@ const Cart = () => {
                     onInstance={(instance) => (data.instance = instance)}
                   />
                 </CheckoutWrapper>
-                Adress
-                <input value={data.address} onChange={handleAddress} />
                 <BuyContainer nopadding>
                   <Button onClick={() => setCheckoutModalOpen(false)} small>
                     Cancel

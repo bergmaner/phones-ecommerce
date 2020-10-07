@@ -238,22 +238,39 @@ exports.image = (req, res, next) => {
 };
 
 exports.searchQuery = (req, res) => {
-  const query={};
+  const query = {};
 
-  if(req.query.search){
-    query.name = {$regex: req.query.search, $options: 'i'}
+  if (req.query.search) {
+    query.name = { $regex: req.query.search, $options: "i" };
   }
-  if(req.query.category && req.query.category === "All"){
+  if (req.query.category && req.query.category === "All") {
     query.category = req.query.category;
   }
 
   Product.find(query, (err, products) => {
-    if(err) {
+    if (err) {
       return res.status(400).json({
-        error: errorHandler(err)
-      })
+        error: errorHandler(err),
+      });
     }
     return res.json(products);
-  })
+  });
+};
 
-}
+exports.updateSold = (req, res, next) => {
+  let bulkOps = req.body.order.products.map((item) => {
+    return {
+      updateOne: {
+        filter: { _id: item._id },
+        update: { $inc: { quantity: -item.count, sold: +item.count } },
+      },
+    };
+  });
+  Product.bulkWrite(bulkOps, {}, (error, products) => {
+    if (error)
+      return res.status(400).json({
+        error: "Could not update product",
+      });
+    next();
+  });
+};

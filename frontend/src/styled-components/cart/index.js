@@ -143,5 +143,28 @@ export const Header = styled.h2`
   margin: 0;
 `;
 export const CheckoutWrapper = styled.div`
-  min-height: 320px;
+  min-height: 400px;
+`;
+
+export const AddressInput = styled.input`
+  width: calc(100% - 44px);
+  margin-left: 20px;
+  margin-top: 5px;
+  height: 44px;
+  border: 1px solid #bfbfbf;
+  padding: 0 8px;
+  outline: none;
+  font-size :16px;
+  &:hover, &:focus{
+    border-color: #7d7d7d;
+    outline: none;
+  }
+`;
+
+export const Label = styled.div`
+  margin-left: 20px;
+  color: #7d7d7d;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.4;
 `;

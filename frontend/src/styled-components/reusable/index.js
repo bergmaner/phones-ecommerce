@@ -17,7 +17,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  min-height: calc(100vh - 61px);
+  min-height: calc(100vh - 65px);
 `;
 
 export const Row = styled.div`

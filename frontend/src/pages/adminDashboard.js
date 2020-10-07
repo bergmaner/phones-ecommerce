@@ -24,6 +24,7 @@ const AdminDashboard = () => {
         <Navigation>
           <li onClick={() => history.push("/create/category")}>Create Category</li>
           <li onClick={() => history.push("/create/product")}>Create Product</li>
+          <li onClick={() => history.push("/orders")}>Orders</li>
         </Navigation>
       </Container>
     </Layout>

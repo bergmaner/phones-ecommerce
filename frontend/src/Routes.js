@@ -9,6 +9,7 @@ import CreateCategory from "./pages/createCategory";
 import CreateProduct from "./pages/createProduct";
 import Products from "./pages/products";
 import Product from "./pages/product";
+import Orders from "./pages/orders";
 import { PrivateRoute, AdminRoute } from "./helpers/auth";
 
 const Routes = () => {
@@ -24,6 +25,7 @@ const Routes = () => {
         <PrivateRoute path="/dashboard/user" component={UserDashboard}/>
         <AdminRoute path="/create/category" component={CreateCategory}/>
         <AdminRoute path="/create/product" component={CreateProduct}/>
+        <AdminRoute path="/orders" component={Orders}/>
       </Switch>
     </Router>
   );

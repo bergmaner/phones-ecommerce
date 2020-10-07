@@ -6,7 +6,7 @@ export const Navigation = styled.nav`
   justify-content: space-around;
   align-items: center;
   li {
-    width: 33%;
+    width: 25%;
     list-style-type: none;
     padding: 20px;
     text-align: center;
@@ -16,6 +16,10 @@ export const Navigation = styled.nav`
     border-radius: 50px;
     margin: 5px 0;
     transition: 0.25s ease;
+    @media(max-width: 672px){
+      padding: 10px;
+      font-size: 10px;
+    }
     :hover{
         cursor: pointer;
         background: #743563;

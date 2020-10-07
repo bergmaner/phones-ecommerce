@@ -23,15 +23,45 @@ exports.update = (req, res) => {
     { id: req.profile._id },
     { $set: req.body },
     { new: true },
-    (err, user) =>{
-        if(err){
-            return res.status(400).json({
-                error: "You are not authorized"
-            })
-        }
-        user.hashed_password = undefined;
-        user.salt = undefined;
-        res.json(user);
+    (err, user) => {
+      if (err) {
+        return res.status(400).json({
+          error: "You are not authorized",
+        });
+      }
+      user.hashed_password = undefined;
+      user.salt = undefined;
+      res.json(user);
+    }
+  );
+};
+
+exports.addOrderToHistory = (req, res, next) => {
+  let history = [];
+
+  req.body.order.products.forEach((item) => {
+    console.log(item);
+    history.push({
+      _id: item._id,
+      name: item.name,
+      description: item.description,
+      category: item.category,
+      count: item.count,
+      transaction_id: req.body.order.transaction_id,
+      amount: req.body.order.amount,
+    });
+  });
+
+  User.findOneAndUpdate(
+    { _id: req.profile._id },
+    { $push: { history: history } },
+    { new: true },
+    (error, data) => {
+      if (error)
+        return res.status(400).json({
+          error: "Could not update history",
+        });
+      next();
     }
   );
 };
