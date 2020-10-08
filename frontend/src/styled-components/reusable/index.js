@@ -15,8 +15,9 @@ export const Information = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: ${props => props.flexCenter ? "center" : "space-around"};
   flex-direction: column;
+  align-items: ${props => props.flexCenter && "center"};
   min-height: calc(100vh - 65px);
 `;
 
@@ -109,4 +110,10 @@ export const Button = styled.button`
     background: #ee9944;
   }
 
+`;
+
+export const FormCenter = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

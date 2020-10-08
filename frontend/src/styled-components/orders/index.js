@@ -12,6 +12,9 @@ export const Table = styled.table`
     color: #fff;
     text-align: left;
     font-weight: bold;
+    th{
+      text-align: center;
+    }
   }
   th,
   td {
