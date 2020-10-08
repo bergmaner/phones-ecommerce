@@ -25,6 +25,7 @@ const Product = () => {
   }, []);
 
   return (
+    product && relatedProducts.length > 0 && 
     <Layout>
       <Container>
         <ProductCard product={product} isDescription />

@@ -98,7 +98,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
 
 export const searchQuery = (params) => {
   const query = queryString.stringify(params);
-  console.log("qqqqq", query)
+  console.log("qqqqq", query);
   return fetch(`${process.env.REACT_APP_API_URL}/products/search?${query}`, {
     method: "GET",
   })
@@ -131,11 +131,11 @@ export const getRelatedList = (id) => {
 export const getBraintreeClientToken = (id, token) => {
   return fetch(`${process.env.REACT_APP_API_URL}/braintree/getToken/${id}`, {
     method: "GET",
-    headers:{
+    headers: {
       Accept: "application/json",
       "Content-Type": "aplication/json",
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
     .then((response) => {
       return response.json();
@@ -144,48 +144,82 @@ export const getBraintreeClientToken = (id, token) => {
 };
 
 export const processPayment = (id, token, paymentData) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/braintree/payment/${id}`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(paymentData)
+  return fetch(`${process.env.REACT_APP_API_URL}/braintree/payment/${id}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(paymentData),
+  })
+    .then((response) => {
+      return response.json();
     })
-        .then(response => {
-            return response.json();
-        })
-        .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const createOrder = (id, token, orderData) => {
   return fetch(`${process.env.REACT_APP_API_URL}/order/create/${id}`, {
-      method: "POST",
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({ order: orderData})
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ order: orderData }),
   })
-      .then(response => {
-          return response.json();
-      })
-      .catch(err => console.log(err));
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
 };
 
 export const getOrderList = (id, token) => {
   return fetch(`${process.env.REACT_APP_API_URL}/order/list/${id}`, {
-      method: "GET",
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-      }
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   })
-      .then(response => {
-          return response.json();
-      })
-      .catch(err => console.log(err));
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getStatusList = (id, token) => {
+  return fetch(`${process.env.REACT_APP_API_URL}/order/statusList/${id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const updateOrderStatus = (id, token, orderId, status) => {
+  return fetch(
+    `${process.env.REACT_APP_API_URL}/order/${orderId}/status/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ status, orderId }),
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
 };

@@ -61,6 +61,9 @@ export const SearchInput = styled.input`
   box-shadow: none;
   border-radius: 0;
   transition: 250ms all ease-in-out;
+  @media(max-width: 399px){
+    width: 190px;
+  }
 `;
 
 export const SearchButton = styled.button`
