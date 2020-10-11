@@ -24,10 +24,10 @@ const Routes = () => {
         <Route path="/product/:productId" component={Product} />
         <PrivateRoute path="/dashboard/user" component={UserDashboard} />
         <PrivateRoute path="/profile/:userId" component={Profile} />
+        <PrivateRoute path="/orders" component={Orders} />
         <AdminRoute path="/dashboard/admin" component={AdminDashboard} />
         <AdminRoute path="/create/category" component={CreateCategory} />
         <AdminRoute path="/create/product" component={CreateProduct} />
-        <AdminRoute path="/orders" component={Orders} />
       </Switch>
     </Router>
   );

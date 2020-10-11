@@ -22,6 +22,21 @@ export const Table = styled.table`
   }
   tbody tr {
     border-bottom: 1px solid #dddddd;
+    td{
+      position: relative;
+      svg{
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-45%);
+        font-size: 1.4em;
+        color:  #965785;
+        :hover{
+          color: #ee9944;
+          cursor: pointer;
+        }
+      }
+    }
     :nth-of-type(even) {
       background: #f3f3f3;
     }
@@ -102,4 +117,7 @@ export const Table = styled.table`
 
 export const TableContainer = styled.div`
   margin: 0 10px;
-`;
+  h2{
+  text-align: center;
+  }
+  `;

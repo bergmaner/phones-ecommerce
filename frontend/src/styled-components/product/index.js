@@ -232,3 +232,11 @@ export const LoadContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ProductsWrapper= styled.div`
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

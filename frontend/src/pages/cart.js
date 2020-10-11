@@ -174,7 +174,7 @@ const Cart = () => {
 
         <CartContainer>
           {items.map((item) => (
-            <CartItem key={item._id} product={item} run={run} setRun={setRun} />
+            <CartItem fullVisible key={item._id} product={item} run={run} setRun={setRun} />
           ))}
         </CartContainer>
         <BuyContainer>

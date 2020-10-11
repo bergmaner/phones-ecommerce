@@ -12,7 +12,7 @@ import { IoMdTrash } from "react-icons/io";
 import { getImageUrl } from "../helpers/api";
 import { updateCount, deleteItem } from "../helpers/cart";
 
-const CartItem = ({ product, setRun, run}) => {
+const CartItem = ({ product, setRun, run, fullVisible }) => {
   const { _id, name, price, quantity } = product;
   const [count, setCount] = useState(product.count);
 
@@ -38,20 +38,22 @@ const CartItem = ({ product, setRun, run}) => {
   return (
     product && (
       <Item>
-        <ControlsContainer>
-          <ControlButton
-            disabled={count === quantity && true}
-            onClick={handleIncrement}
-          >
-            +
-          </ControlButton>
-          <ControlButton
-            disabled={count === 1 && true}
-            onClick={handleDecrement}
-          >
-            -
-          </ControlButton>
-        </ControlsContainer>
+        {fullVisible && (
+          <ControlsContainer>
+            <ControlButton
+              disabled={count === quantity && true}
+              onClick={handleIncrement}
+            >
+              +
+            </ControlButton>
+            <ControlButton
+              disabled={count === 1 && true}
+              onClick={handleDecrement}
+            >
+              -
+            </ControlButton>
+          </ControlsContainer>
+        )}
         <ItemWrapper>
           <ImageContainer>
             <img src={getImageUrl(product, "product")} />
@@ -59,9 +61,11 @@ const CartItem = ({ product, setRun, run}) => {
           <NameWrapper>{name}</NameWrapper>
           <h5>{price} PLN</h5>
           <Count>{count}</Count>
-          <ControlButton onClick={handleDelete}>
-            <IoMdTrash />
-          </ControlButton>
+          {fullVisible && (
+            <ControlButton onClick={handleDelete}>
+              <IoMdTrash />
+            </ControlButton>
+          )}
         </ItemWrapper>
       </Item>
     )
