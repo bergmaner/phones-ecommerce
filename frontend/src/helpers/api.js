@@ -270,7 +270,6 @@ export const updateUser = (user, next) => {
   }
 };
 
-
 export const getPurchaseHistory = (userId, token) => {
   return fetch(`${process.env.REACT_APP_API_URL}/orders/by/user/${userId}`, {
     method: "GET",
@@ -287,3 +286,54 @@ export const getPurchaseHistory = (userId, token) => {
       console.log(err);
     });
 };
+
+export const getProductsList = () => {
+  return fetch(`${process.env.REACT_APP_API_URL}/products?limit=undefined`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const deleteProduct = (productId, userId, token) => {
+  return fetch(
+    `${process.env.REACT_APP_API_URL}/product/${productId}/${userId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const updateProduct = (productId, userId, token, product) => {
+  return fetch(
+    `${process.env.REACT_APP_API_URL}/product/${productId}/${userId}`,
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: product
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+

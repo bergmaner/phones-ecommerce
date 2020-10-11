@@ -5,7 +5,7 @@ import { getProduct, getRelatedList } from "../helpers/api";
 import {
   Container,
   RelatedList,
-  RelatedProductsContainer
+  RelatedProductsContainer,
 } from "../styled-components/product";
 import { useParams } from "react-router-dom";
 
@@ -25,21 +25,24 @@ const Product = () => {
   }, []);
 
   return (
-    product && relatedProducts.length > 0 && 
-    <Layout>
-      <Container>
-        <ProductCard product={product} isDescription />
-        <RelatedProductsContainer >
-        <RelatedList>
-          <h2>Related List</h2>
-            {relatedProducts &&
-              relatedProducts?.map((prod) => (
-                <ProductCard small key={prod._id} product={prod} />
-              ))}
-        </RelatedList>
-        </RelatedProductsContainer>
-      </Container>
-    </Layout>
+    product && (
+      <Layout>
+        <Container>
+          <ProductCard product={product} isDescription />
+          {relatedProducts.length > 0 && (
+            <RelatedProductsContainer>
+              <RelatedList>
+                <h2>Related List</h2>
+                {relatedProducts &&
+                  relatedProducts?.map((prod) => (
+                    <ProductCard small key={prod._id} product={prod} />
+                  ))}
+              </RelatedList>
+            </RelatedProductsContainer>
+          )}
+        </Container>
+      </Layout>
+    )
   );
 };
 export default Product;

@@ -99,27 +99,12 @@ exports.update = (req, res) => {
       });
     }
 
-    const { name, description, price, category, quantity, shipping } = fields;
-
-    if (
-      !name ||
-      !description ||
-      !price ||
-      !category ||
-      !quantity ||
-      !shipping
-    ) {
-      return res.status(400).json({
-        error: "All fields are required",
-      });
-    }
-
     let product = req.product;
     product = _.extend(product, fields);
 
     if (files.image) {
       if (files.image.size > 1000000) {
-        return res.status(400).jsonn({
+        return res.status(400).json({
           error: "Image should be less than 1MB",
         });
       }

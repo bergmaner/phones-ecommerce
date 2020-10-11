@@ -9,10 +9,11 @@ import {
   Count,
 } from "../styled-components/cart";
 import { IoMdTrash } from "react-icons/io";
+import { FaEdit } from "react-icons/fa";
 import { getImageUrl } from "../helpers/api";
 import { updateCount, deleteItem } from "../helpers/cart";
 
-const CartItem = ({ product, setRun, run, fullVisible }) => {
+const CartItem = ({ product, handleUpdate, handleDestroy, setRun, run, fullVisible, manage }) => {
   const { _id, name, price, quantity } = product;
   const [count, setCount] = useState(product.count);
 
@@ -60,7 +61,17 @@ const CartItem = ({ product, setRun, run, fullVisible }) => {
           </ImageContainer>
           <NameWrapper>{name}</NameWrapper>
           <h5>{price} PLN</h5>
-          <Count>{count}</Count>
+          {!manage && <Count>{count}</Count>}
+          {manage && (
+            <div>
+              <ControlButton onClick={handleUpdate}>
+                <FaEdit />
+              </ControlButton>
+              <ControlButton onClick={handleDestroy}>
+                <IoMdTrash />
+              </ControlButton>
+            </div>
+          )}
           {fullVisible && (
             <ControlButton onClick={handleDelete}>
               <IoMdTrash />

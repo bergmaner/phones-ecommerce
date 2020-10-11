@@ -11,6 +11,8 @@ import Products from "./pages/products";
 import Product from "./pages/product";
 import Orders from "./pages/orders";
 import Profile from "./pages/profile";
+import ManageProducts from "./pages/manageProducts";
+import UpdateProduct from "./pages/updateProduct";
 import { PrivateRoute, AdminRoute } from "./helpers/auth";
 
 const Routes = () => {
@@ -28,6 +30,8 @@ const Routes = () => {
         <AdminRoute path="/dashboard/admin" component={AdminDashboard} />
         <AdminRoute path="/create/category" component={CreateCategory} />
         <AdminRoute path="/create/product" component={CreateProduct} />
+        <AdminRoute path="/manage/products" component={ManageProducts} />
+        <AdminRoute path="/update/product/:productId" component={UpdateProduct} />
       </Switch>
     </Router>
   );

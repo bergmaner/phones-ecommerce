@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../layout/Layout";
 import { isAuthenticated } from "../helpers/auth";
-import { createProduct, getAllCategories } from "../helpers/api";
+import { getProduct, getAllCategories, updateProduct } from "../helpers/api";
+import { useParams } from "react-router-dom";
 import {
   FaEdit,
   FaMoneyBill,
   FaRegHandPeace,
   FaShippingFast,
-  FaImage
+  FaImage,
 } from "react-icons/fa";
 import { ImPriceTag } from "react-icons/im";
 import {
@@ -21,17 +22,19 @@ import {
 } from "../styled-components/reusable";
 
 const CreateProduct = () => {
+  const { productId } = useParams();
+  const [categories, setCategories] = useState([]);
   const [values, setValues] = useState({
     name: "",
     description: "",
     price: "",
-    categories: [],
     category: "",
     shipping: "",
     quantity: "",
     image: "",
     loading: false,
     error: "",
+    createdProduct: "",
     redirect: false,
     formData: "",
   });
@@ -40,25 +43,50 @@ const CreateProduct = () => {
     name,
     description,
     price,
-    categories,
     category,
     shipping,
     quantity,
     image,
     loading,
     error,
+    createdProduct,
     redirect,
     formData,
   } = values;
 
+
+  
   useEffect(() => {
     getAllCategories().then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else
-        setValues({ ...values, categories: data, formData: new FormData() });
+        setCategories(data);
     });
   }, []);
+
+  useEffect(() => {
+    getProduct(productId).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } 
+      else {
+          console.log(data)
+        setValues({
+          ...values,
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          category: data.category,
+          shipping: data.shipping,
+          quantity: data.quantity,
+          image: data.image,
+          formData: new FormData(),
+        });
+      }
+    });
+  }, []);
+
 
   const handleChange = (name) => (e) => {
     const value = name === "image" ? e.target.files[0] : e.target.value;
@@ -71,8 +99,9 @@ const CreateProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(values)
     setValues({ ...values, error: "", loading: true });
-    createProduct(user, token, formData).then((data) => {
+    updateProduct(productId,user._id, token, formData).then((data) => {
       if (data.error)
         setValues({
           ...values,
@@ -95,7 +124,7 @@ const CreateProduct = () => {
   return (
     <Layout>
       <Container>
-        <Title>Create Product</Title>
+        <Title>Update Product</Title>
         <Form onSubmit={handleSubmit} visible={true}>
           <Row>
             <h2>Name: </h2>
@@ -138,7 +167,7 @@ const CreateProduct = () => {
             <h2>Category: </h2>
             <InputContainer>
               <ImPriceTag />
-              <select onChange={handleChange("category")}>
+              <select value={category} onChange={handleChange("category")}>
                 <option>Select Category</option>
                 {categories &&
                   categories.map((cat) => (
@@ -166,17 +195,17 @@ const CreateProduct = () => {
             <h2>Shipping: </h2>
             <InputContainer>
               <FaShippingFast />
-              <select onChange={handleChange("shipping")}>
+              <select value={shipping} onChange={handleChange("shipping")}>
                 <option>Select Option</option>
-                <option value={0}>No</option>
-                <option value={1}>Yes</option>
+                <option value={false}>No</option>
+                <option value={true}>Yes</option>
               </select>
             </InputContainer>
           </Row>
           <Row>
             <h2>Image: </h2>
             <InputContainer>
-              <FaImage/>
+              <FaImage />
               <input
                 onChange={handleChange("image")}
                 type="file"
@@ -184,7 +213,7 @@ const CreateProduct = () => {
               />
             </InputContainer>
           </Row>
-          <Button>Add Product</Button>
+          <Button>Update Product</Button>
         </Form>
       </Container>
     </Layout>

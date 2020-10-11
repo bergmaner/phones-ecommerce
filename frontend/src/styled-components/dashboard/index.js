@@ -4,9 +4,10 @@ export const Navigation = styled.nav`
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   align-items: center;
   li {
-    width: 25%;
+    width: 180px;
     list-style-type: none;
     padding: 20px;
     text-align: center;
