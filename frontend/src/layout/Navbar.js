@@ -1,30 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import {
   SLink,
+  CartLink,
+  TitleLink,
   NavContainer,
   NavWrapper,
   CartContainer,
   CartNumber,
   NavItems,
-  Title,
   Account,
   Signout,
+  Menu
 } from "../styled-components/navbar";
-import { MdShoppingCart } from "react-icons/md";
+import { MdShoppingCart, MdMenu } from "react-icons/md";
 import { getTotalItems } from "../helpers/cart";
 import { signout, isAuthenticated } from "../helpers/auth";
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   let history = useHistory();
-
+  const [switchOn, setSwitchOn] = useState(false);
+  console.log(switchOn);
   return (
     <NavWrapper>
       <NavContainer>
-        <NavItems>
-          <Title>
-            <SLink to="/">Phonez</SLink>
-          </Title>
+        <NavItems switchOn = {switchOn}>
+            <TitleLink to="/">Phonez</TitleLink>
           <SLink to="/products">Products</SLink>
           {isAuthenticated()?.user?.role === 1 && (
             <SLink to="/dashboard/admin">Dashboard</SLink>
@@ -32,31 +34,31 @@ const Navbar = () => {
           {isAuthenticated()?.user?.role === 0 && (
             <SLink to="/dashboard/user">Dashboard</SLink>
           )}
-          <SLink to="/contact">Contact</SLink>
+          <SLink to="#footer">Contact</SLink>
           <Account>
             {!isAuthenticated() ? (
               <>
-                <SLink to="/cart">
+                <CartLink to="/cart">
                   <CartContainer>
                     <MdShoppingCart />
                     {getTotalItems() !== 0 && (
                       <CartNumber>{getTotalItems()}</CartNumber>
                     )}
                   </CartContainer>
-                </SLink>
+                </CartLink>
                 <SLink to="/signin-or-signup">Sign In | </SLink>
                 <SLink to="/signin-or-signup">Sign Up</SLink>
               </>
             ) : (
               <>
-              <SLink to="/cart">
+              <CartLink to="/cart">
                <CartContainer>
                     <MdShoppingCart />
                     {getTotalItems() !== 0 && (
                       <CartNumber>{getTotalItems()}</CartNumber>
                     )}
                   </CartContainer>
-                  </SLink>
+                  </CartLink>
                 <Signout
                   onClick={() =>
                     signout(() => history.push("/signin-or-signup"))
@@ -68,6 +70,9 @@ const Navbar = () => {
             )}
           </Account>
         </NavItems>
+        <Menu onClick={() => setSwitchOn(!switchOn)}>
+        <MdMenu/>
+        </Menu>
       </NavContainer>
     </NavWrapper>
   );

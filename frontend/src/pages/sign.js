@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Layout from "../layout/Layout";
+import Navbar from "../layout/Navbar";
 import SignInForm from "../components/SignInForm";
 import SignUpForm from "../components/SignUpForm";
 import SignContent from "../components/SignContent";
@@ -9,7 +9,8 @@ const Sign = () => {
   const [signUp, setSignUp] = useState(false);
   console.log(signUp)
   return (
-    <Layout>
+    <>
+    <Navbar/>
       <Container transform={signUp ? 1 : 0}>
         <FormsContainer>
           <SignForm visible={signUp}>
@@ -19,7 +20,7 @@ const Sign = () => {
         </FormsContainer>
         <SignContent signUp={signUp} setSignUp={setSignUp} />
       </Container>
-    </Layout>
+      </>
   );
 };
 export default Sign;
