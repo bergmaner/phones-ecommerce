@@ -64,7 +64,7 @@ const OrdersList = () => {
     !loading && (
       <TableContainer>
         { orders.length < 1 ? <h2>You don't have orders</h2> : <h2>Your orders</h2>}
-        <Modal isOpen={isOpen} onRequestClose={() => setOpen(false)}>
+        {orders.length > 0 && <Modal isOpen={isOpen} onRequestClose={() => setOpen(false)}>
           <ProductsWrapper>
             {orders[active].products.map((product) => (
               <CartItem product={product} />
@@ -73,7 +73,7 @@ const OrdersList = () => {
               Back
             </Button>
           </ProductsWrapper>
-        </Modal>
+        </Modal>}
         <Table>
           <thead>
             <tr>

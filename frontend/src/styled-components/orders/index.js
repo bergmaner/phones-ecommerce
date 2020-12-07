@@ -117,6 +117,7 @@ export const Table = styled.table`
 
 export const TableContainer = styled.div`
   margin: 0 10px;
+  min-height: 200px;
   h2{
   text-align: center;
   }

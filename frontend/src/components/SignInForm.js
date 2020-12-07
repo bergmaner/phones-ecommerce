@@ -38,11 +38,6 @@ const SignInForm = ({ signUp }) => {
   };
 
   const redirectUser = () => {
-    if (redirect) {
-      if (user && user.role === 1) {
-        return <Redirect to="/dashboard/admin" />;
-      } else return <Redirect to="/dashboard/user" />;
-    }
     if (isAuthenticated()) {
       history.push("/");
     }
