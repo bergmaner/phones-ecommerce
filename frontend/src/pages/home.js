@@ -4,6 +4,7 @@ import Layout from "../layout/Layout";
 import ProductCard from "../components/ProductCard";
 import Searchbar from "../components/Searchbar";
 import { ProductsList } from "../styled-components/product";
+import { SpinnerContainer } from "../styled-components/reusable";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -26,6 +27,12 @@ const Home = () => {
 
   return (
     <Layout title="Phonez" description="E-commerce shop">
+      { products.length < 1 ?
+      <SpinnerContainer>
+      <img src={require("../assets/spinner.gif")}/>
+      </SpinnerContainer>
+      : 
+      <>
       <Searchbar />
       <h1>New Products</h1>
       <ProductsList>
@@ -35,6 +42,8 @@ const Home = () => {
           </Link>
         ))}
       </ProductsList>
+      </>
+}
     </Layout>
   );
 };

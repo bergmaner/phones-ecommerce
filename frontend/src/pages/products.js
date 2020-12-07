@@ -9,7 +9,7 @@ import {
   ProductsList,
   LoadContainer,
 } from "../styled-components/product";
-import { Button } from "../styled-components/reusable";
+import { Button, SpinnerContainer } from "../styled-components/reusable";
 import { prices } from "../config";
 import PricesRange from "../components/PricesRange";
 import { Link } from "react-router-dom";
@@ -88,8 +88,13 @@ const Products = () => {
   console.log("res", filteredResults);
   console.log(filtersList);
   return (
-    filteredResults && !loading && (
+    filteredResults && (
       <Layout>
+        { loading ?
+      <SpinnerContainer>
+      <img src={require("../assets/spinner.gif")}/>
+      </SpinnerContainer>
+      : 
         <ProductsContainer>
           <CategoryList>
             <CheckboxList
@@ -108,6 +113,7 @@ const Products = () => {
             ))}
           </ProductsList>
         </ProductsContainer>
+}
         <LoadContainer>
           {size > 0 && size >= limit && (
             <Button onClick={() => loadMore()}>Load More</Button>

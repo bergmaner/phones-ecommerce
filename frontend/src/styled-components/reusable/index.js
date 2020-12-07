@@ -21,6 +21,14 @@ export const Container = styled.div`
   min-height: calc(100vh - 65px);
 `;
 
+export const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 65px);
+`;
+
 export const Row = styled.div`
 max-width: 700px;
   display: flex;

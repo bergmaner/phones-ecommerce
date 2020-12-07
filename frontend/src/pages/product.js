@@ -8,6 +8,7 @@ import {
   RelatedProductsContainer,
 } from "../styled-components/product";
 import { useParams } from "react-router-dom";
+import { SpinnerContainer } from "../styled-components/reusable";
 
 const Product = () => {
   const { productId } = useParams();
@@ -25,8 +26,8 @@ const Product = () => {
   }, []);
 
   return (
-    product && (
       <Layout>
+        {product ? 
         <Container>
           <ProductCard product={product} isDescription />
           {relatedProducts.length > 0 && (
@@ -41,8 +42,12 @@ const Product = () => {
             </RelatedProductsContainer>
           )}
         </Container>
+        :
+      <SpinnerContainer>
+        <img src={require("../assets/spinner.gif")}/>
+      </SpinnerContainer>
+}
       </Layout>
-    )
   );
 };
 export default Product;
